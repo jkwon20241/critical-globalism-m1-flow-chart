@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A flowchart concept map of Man / the Human across Lowe, Wynter, and Colonial Racial Capitalism, by Jennie Kwon for Critical Globalisms.">
+<title>Who Counts as Human?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap">
+<style>
+/* ABC Repro: used from the viewer's installed fonts (trial files are not embedded); Archivo is the fallback. */
+@font-face{font-family:"Repro";src:local("ABC Repro Trial"),local("ABCReproTrial-Regular"),local("ABC Repro"),local("ABCRepro-Regular");font-weight:400;font-style:normal}
+@font-face{font-family:"Repro";src:local("ABC Repro Trial Italic"),local("ABCReproTrial-RegularItalic"),local("ABC Repro Italic"),local("ABCRepro-RegularItalic");font-weight:400;font-style:italic}
+@font-face{font-family:"Repro";src:local("ABC Repro Trial Bold"),local("ABCReproTrial-Bold"),local("ABC Repro Bold"),local("ABCRepro-Bold");font-weight:700;font-style:normal}
+@font-face{font-family:"Repro";src:local("ABC Repro Trial Black"),local("ABCReproTrial-Black"),local("ABC Repro Black"),local("ABCRepro-Black");font-weight:900;font-style:normal}
+@font-face{font-family:"Repro";src:local("ABC Repro Trial Black Italic"),local("ABCReproTrial-BlackItalic"),local("ABC Repro Black Italic"),local("ABCRepro-BlackItalic");font-weight:900;font-style:italic}
+@font-face{font-family:"Repro";src:local("ABC Repro Trial Bold Italic"),local("ABCReproTrial-BoldItalic"),local("ABC Repro Bold Italic"),local("ABCRepro-BoldItalic");font-weight:700;font-style:italic}
+/* Layout: a classic flowchart. Start pill → question diamonds that branch into one shape per text → examples → end pill, inside a dashed reading frame. Shapes, not colors, tell the texts apart. ABC Repro: heading 14pt, subheading 13pt, body 12pt. */
+:root{
+  /* single charcoal look, by request: one palette for every viewer */
+  --bg:#2B2B2D; --paper:#333336; --ink:#F2F1EC; --muted:#B9B8B2; --line:#7B7B7F; --fill:#3E3E42;
+  --cursor:#F5F4EF; --cursor-hot:#FFD400;
+  --go:#82C972; --go-fill:#2F4729; --end-fill:#5B3330; --focus:#8AB4F8;
+  /* one color per text: Lowe indigo (the dyed cottons and silks of her colonial trade), Wynter rose, Koshy et al. copper (debt, ore, extraction); examples green */
+  --lowe:#8FAEF2; --wynter:#EE8DB2; --crc:#E39E62; --film:#9AD58B;
+  --lowe-wash:#30384B; --wynter-wash:#46313B; --crc-wash:#46382B; --film-wash:var(--go-fill);
+  --font:"Repro","ABC Repro Trial","ABC Repro","Archivo",system-ui,sans-serif;
+  --scale:1;
+  --body:calc(12pt * var(--scale)); --sub:calc(13pt * var(--scale)); --head:calc(14pt * var(--scale));
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html,body,*{-webkit-user-select:none;user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none}
+html{font-size:var(--body)}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:var(--body);line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+button{font-family:var(--font);font-size:var(--body);color:var(--ink)}
+.layout{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr);gap:36px}
+.wrap{width:100%;display:grid;gap:44px;min-width:0}
+.side{display:none}
+@media (min-width:1200px){
+  .layout{grid-template-columns:230px minmax(0,1fr)}
+  .side{display:block;position:sticky;top:calc(env(safe-area-inset-top,0px) + 64px);align-self:start;max-height:calc(100vh - 80px);overflow:auto;padding:24px 4px 24px 0}
+  #tocBtn{display:none}
+}
+.toc{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.toc a{display:flex;align-items:center;gap:9px;color:var(--ink);text-decoration:none;padding:4px 8px;border-left:2px solid transparent;line-height:1.3}
+.toc a:hover{background:var(--fill)}
+.toc a.on{border-left-color:var(--go);background:var(--go-fill);font-weight:700}
+.toc a.c-lowe,.toc .sub a.c-lowe{color:var(--lowe)} .toc a.c-wynter,.toc .sub a.c-wynter{color:var(--wynter)} .toc a.c-crc,.toc .sub a.c-crc{color:var(--crc)} .toc a.c-film{color:var(--film)}
+.toc a.strong{font-weight:700}
+.toc .sub a{padding-left:39px;color:var(--muted)}
+.toc .sub a.on{color:var(--ink)}
+.toc .grp{margin-top:8px}
+.toc-title{font-weight:700;padding:0 8px 6px}
+#tocDlg .dlg-body{padding-top:10px}
+.back{justify-self:start;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.back:hover{color:var(--ink)}
+/* meanings strip */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:30px}
+.steps li{position:relative;display:flex}
+.steps li+li::before{content:"→";position:absolute;left:-23px;top:50%;transform:translateY(-50%);color:var(--go);font-weight:700;font-size:var(--head)}
+.steps .shape{height:100%}
+.steps .shape .in{height:100%;align-content:start}
+.steps .num{font-weight:700;color:var(--go)}
+@media (max-width:900px){
+  .steps{grid-template-columns:1fr;gap:26px}
+  .steps li+li::before{content:"↓";left:50%;top:-22px;transform:translateX(-50%)}
+}
+.about{border:1.5px dashed var(--line);padding:14px 18px;display:grid;gap:6px}
+.about ul{margin:0;padding-left:1.2em;display:grid;gap:3px}
+.col{max-width:64ch;width:100%;min-width:0}
+h1,h2,h3,h4{font-family:var(--font);margin:0;line-height:1.3;text-wrap:balance}
+h1,h2{font-size:var(--head);font-weight:700}
+h1{font-size:calc(32pt * var(--scale));font-weight:900;line-height:1.05;letter-spacing:-.01em}
+.bar-title{font-size:var(--sub);opacity:0;transition:opacity .2s ease}
+.bar.scrolled .bar-title{opacity:1}
+/* each text's title: large and heavy, in that text's color */
+.tt{display:grid;gap:4px;justify-items:start}
+.tt .ico{width:18px;height:18px}
+.tt-author{font-size:var(--sub);font-weight:700}
+.tt-book{font-size:calc(22pt * var(--scale));font-weight:900;line-height:1.12;letter-spacing:-.005em;text-wrap:balance}
+.tt-meta{color:var(--muted)}
+.tt-node{justify-items:center;text-align:center;background:var(--paper);padding:6px 10px}
+.tt-node .tt-book{font-size:calc(17pt * var(--scale))}
+h3,h4{font-size:var(--sub);font-weight:700}
+p{margin:0}
+/* rag: ragged-right body text with an even edge; light hyphenation of long words only; no one-word last lines */
+p,li,blockquote,dd,.tt-meta{text-wrap:pretty;hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:7 3 3;-webkit-hyphenate-limit-before:3;-webkit-hyphenate-limit-after:3;hanging-punctuation:first}
+h1,h2,h3,h4,.t,.tt-book,.tt-author,summary,.btn,.toc a,.legend span,.chips span,.kw span,cite{hyphens:manual;-webkit-hyphens:manual}
+.shape .in > span,.diamond .t,.pill > span{text-wrap:balance}
+blockquote{text-indent:0}
+.soft{font-style:italic;color:var(--muted)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+
+/* shape tokens: one per text, reused in legend, chart, reader, and section heads */
+.ico{display:inline-block;width:14px;height:14px;flex:none;vertical-align:-2px;background:var(--ink)}
+.ico.lowe{background:var(--lowe)}                                                   /* square */
+.ico.wynter{background:var(--wynter);clip-path:polygon(50% 0,100% 100%,0 100%)}         /* triangle */
+.ico.crc{background:var(--crc);border-radius:50%}                                   /* circle */
+.ico.q{background:none;border:1.5px solid var(--ink);transform:rotate(45deg) scale(.82)} /* outlined diamond */
+.ico.ex{background:var(--go);clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)} /* green hexagon */
+.ico.pill{display:none}                                       /* no icon for start/end, overview, conclusion */
+.shape .in > .ico{width:18px;height:18px}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);
+  margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));padding-block:10px;border-bottom:1px solid var(--line)}
+.bar-in{max-width:1380px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.btn{border:1.5px solid var(--ink);background:var(--bg);padding:5px 14px;cursor:pointer;line-height:1.3;color:var(--ink);text-decoration:none;white-space:nowrap}
+.btn:hover{background:var(--fill)}
+.btn.go{background:var(--go-fill);border-color:var(--go)}
+.btn.round{border-radius:999px}
+.size{display:flex;align-items:center;gap:6px}
+.size .btn{padding:3px 11px}
+.size .btn{min-width:36px;font-weight:700}
+.pill.start{cursor:default}
+.pill.start:hover{background:var(--bg)}
+/* custom cursor: a 15px circle, black by default, yellow over anything clickable */
+@media (hover:hover) and (pointer:fine){html.cc,html.cc *{cursor:none !important}}
+.cur{position:fixed;left:0;top:0;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:50%;background:var(--cursor);pointer-events:none;z-index:2147483647;transform:translate(-100px,-100px);transition:background-color .12s ease}
+.cur.hot{background:var(--cursor-hot);box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+.cur.off{opacity:0}
+.bar-title{font-weight:700}
+.bar-about{margin-left:auto}
+.secnav{display:flex;gap:6px;overflow-x:auto;max-width:100%;padding-block:2px}
+.secnav .btn{border-width:1px}
+
+/* opening */
+header.top{display:grid;gap:12px;padding-top:32px}
+.byline{display:flex;flex-wrap:wrap;gap:2px 10px;color:var(--muted)}
+.byline span+span::before{content:"·";margin-right:10px}
+.legend{display:flex;flex-wrap:wrap;gap:10px 30px;border:1px dashed var(--line);padding:14px 18px}
+.legend span{display:flex;align-items:center;gap:10px}
+
+/* chart */
+.chart-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);background:var(--paper)}
+.chart{position:relative;min-width:calc(980px * var(--scale));padding:28px 34px 34px;display:grid;justify-items:center;gap:0}
+.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0}
+.wires path{fill:none;stroke-width:1.6}
+.wires path.flow{stroke:var(--go)}
+.wires path.join{stroke:var(--line)}
+.wires text{font-family:var(--font);font-size:var(--body);font-style:italic;fill:var(--go);font-weight:700}
+.chart > *:not(.wires){position:relative;z-index:1}
+.gap{height:calc(58px * var(--scale))}
+.gap.sm{height:calc(44px * var(--scale))}
+
+.frame{width:100%;border:1.5px dashed var(--line);padding:46px 26px 34px;display:grid;justify-items:center;position:relative}
+.frame-label{position:absolute;top:10px;right:16px;font-weight:700;font-style:italic}
+.frame-label.left{right:auto;left:16px;font-weight:400;color:var(--muted)}
+
+.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:56px;width:100%;align-items:start}
+
+/* shapes */
+.shape{cursor:pointer;border:none;background:none;padding:0;width:100%;text-align:center;display:block}
+.shape .in{display:grid;gap:6px;justify-items:center;padding:12px 16px 10px;background:var(--bg)}
+.shape .t{font-size:var(--sub);font-weight:700;line-height:1.3}
+.shape .src{font-style:italic;color:var(--muted)}
+.shape .kw{display:flex;flex-wrap:wrap;justify-content:center;gap:4px}
+.shape .kw span{background:var(--fill);padding:1px 7px;line-height:1.35}
+.shape .more{font-style:italic;color:var(--muted);font-size:var(--body)}
+.shape:hover .in{background:var(--paper)}
+.shape:hover .more{color:var(--ink);text-decoration:underline}
+
+.s-text .in{border:1.5px solid var(--ink)}
+.t-lowe .in{border-color:var(--lowe)} .t-lowe .src,.t-lowe .t{color:var(--lowe)} .t-lowe .kw span{background:var(--lowe-wash)}
+.t-wynter .in{border-color:var(--wynter)} .t-wynter .src,.t-wynter .t{color:var(--wynter)} .t-wynter .kw span{background:var(--wynter-wash)}
+.t-crc .in{border-color:var(--crc)} .t-crc .src,.t-crc .t{color:var(--crc)} .t-crc .kw span{background:var(--crc-wash)}
+.s-ex .t,.s-ex .src{color:var(--film)}
+.thumb{display:block;width:100%;height:calc(104px * var(--scale));object-fit:cover;border-radius:10px;background:var(--paper)}
+.fig{margin:0;display:grid;gap:8px}
+.fig img{display:block;width:100%;height:auto;max-height:440px;object-fit:contain;background:var(--paper);border:1px solid var(--line)}
+.fig figcaption{font-style:italic;color:var(--muted);text-wrap:pretty}
+.s-ex .in{border:1.5px solid var(--go);background:var(--go-fill);border-radius:16px}
+.s-ex:hover .in{filter:brightness(.97)}
+
+.pill{border:1.5px solid var(--ink);border-radius:999px;padding:10px 34px;background:var(--bg);cursor:pointer;display:grid;gap:2px;justify-items:center;text-align:center}
+.pill .t{font-size:var(--head);font-weight:700}
+.pill:hover{background:var(--paper)}
+.pill.end{background:var(--end-fill);max-width:640px}
+.pill.end:hover{filter:brightness(.97)}
+
+.diamond{cursor:pointer;border:none;padding:0;background:var(--ink);width:calc(330px * var(--scale));height:calc(150px * var(--scale));clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);display:block}
+.diamond .in{width:100%;height:100%;background:var(--bg);clip-path:polygon(50% 1.6px,calc(100% - 3px) 50%,50% calc(100% - 1.6px),3px 50%);display:grid;place-content:center;gap:2px;padding:0 70px;text-align:center}
+.diamond .t{font-size:var(--sub);font-weight:700;line-height:1.25}
+.diamond .n{font-style:italic;color:var(--muted)}
+.diamond:hover .in{background:var(--fill)}
+.diamond:focus-visible{outline:none}
+.diamond:focus-visible .in{background:var(--fill)}
+
+.chart-note{margin-top:10px}
+
+/* written component */
+section{display:grid;gap:22px}
+.sec-head{display:grid;gap:6px;border-top:1.5px solid var(--ink);padding-top:16px}
+.sec-head h2{display:flex;align-items:center;gap:10px}
+.entry{display:grid;gap:10px;scroll-margin-top:96px}
+.entry .lbl{font-style:italic;color:var(--muted)}
+.lowe-e .lbl,.lowe-e h3{color:var(--lowe)} .wynter-e .lbl,.wynter-e h3{color:var(--wynter)} .crc-e .lbl,.crc-e h3{color:var(--crc)}
+.film-e .lbl,.film-e h3,.film-e h4{color:var(--film)}
+.lowe-e blockquote{background:var(--lowe-wash);border-left:3px solid var(--lowe)} .wynter-e blockquote{background:var(--wynter-wash);border-left:3px solid var(--wynter)} .crc-e blockquote{background:var(--crc-wash);border-left:3px solid var(--crc)}
+blockquote{margin:0;padding:12px 18px;background:var(--fill);line-height:1.5}
+.film-e blockquote{background:var(--go-fill);border-left:3px solid var(--film)}
+blockquote cite{font-style:normal;white-space:nowrap}
+.entry b{font-weight:700}
+.scene{display:grid;gap:6px;padding-left:16px;border-left:1.5px dashed var(--line)}
+.c-lowe{color:var(--lowe)} .c-wynter{color:var(--wynter)} .c-crc{color:var(--crc)} .c-film{color:var(--film)}
+.kw-list{display:grid;gap:12px}
+details{border:1.5px solid var(--ink)}
+summary{cursor:pointer;padding:10px 16px;font-weight:700;font-size:var(--sub)}
+.kw-body{padding:0 16px 14px;display:grid;gap:12px}
+.kw-ch{display:grid;gap:6px}
+.kw-ch p{font-style:italic}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{padding:1px 8px;background:var(--fill)}
+.cited{display:grid;gap:8px}
+.cited p{padding-left:2em;text-indent:-2em}
+
+/* reader */
+dialog{width:min(720px,calc(100% - 32px));max-height:min(88vh,920px);padding:0;border:1.5px solid var(--ink);background:var(--bg);color:var(--ink);font-family:var(--font);font-size:var(--body)}
+dialog::backdrop{background:rgba(0,0,0,.6)}
+.dlg{display:grid;grid-template-rows:auto 1fr auto;max-height:min(88vh,920px)}
+.dlg-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px dashed var(--line)}
+.dlg-top .where{display:flex;align-items:center;gap:10px}
+.dlg-body{overflow:auto;padding:16px 24px 18px;display:grid;gap:12px;align-content:start}
+.dlg-body .entry{scroll-margin-top:0}
+.terms{display:grid;gap:8px;border:1.5px dashed var(--line);padding:12px 16px}
+.terms dl{margin:0;display:grid;gap:6px}
+.terms dt{font-weight:700;display:inline}
+.terms dd{margin:0;display:inline}
+.terms div{line-height:1.45}
+.answers{display:grid;gap:10px}
+.answer{display:grid;gap:4px;text-align:left;border:1.5px solid var(--ink);background:var(--bg);padding:10px 14px;cursor:pointer}
+.answer:hover{background:var(--fill)}
+.answer .src{display:flex;align-items:center;gap:8px;font-style:italic;color:var(--muted)}
+.rel{display:grid;gap:6px}
+.rel .chips button{border:1px solid var(--line);background:var(--bg);padding:2px 10px;cursor:pointer}
+.rel .chips button:hover{border-color:var(--ink)}
+.dlg-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 20px 14px;border-top:1px dashed var(--line);flex-wrap:wrap}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+<style>/* page reset (the claude.ai host adds this itself) */
+body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+</head>
+<body>
+
+
+<div class="bar" role="region" aria-label="Reading tools">
+  <div class="bar-in">
+    <button class="btn" id="tocBtn" type="button" aria-haspopup="dialog">☰ Contents</button>
+    <span class="bar-title">Who Counts as Human?</span>
+    <a class="btn bar-about" href="about.html">About this project</a>
+  </div>
+</div>
+
+<div class="layout" lang="en">
+<aside class="side" aria-label="Contents"><p class="toc-title">Contents</p><ul class="toc"><li class="grp"><a href="#top" class="strong"><i class="ico pill"></i>Overview</a></li><li class="grp"><a href="#meanings"><i class="ico q"></i>How the meaning develops</a></li><li class="grp"><a href="#map"><i class="ico q"></i>The flowchart</a></li><li class="grp"><a href="#lowe" class="c-lowe"><i class="ico lowe"></i>Lisa Lowe</a></li><li class="sub"><a href="#lowe-1" class="c-lowe">Liberal universalism</a></li><li class="sub"><a href="#lowe-2" class="c-lowe">Colonial divisions of humanity</a></li><li class="sub"><a href="#lowe-3" class="c-lowe">Colonial division of intimacy</a></li><li class="sub"><a href="#lowe-4" class="c-lowe">Affirmation and forgetting</a></li><li class="grp"><a href="#wynter" class="c-wynter"><i class="ico wynter"></i>Sylvia Wynter</a></li><li class="sub"><a href="#wynter-1" class="c-wynter">The overrepresentation of Man</a></li><li class="sub"><a href="#wynter-2" class="c-wynter">Man1 and the Human Other</a></li><li class="sub"><a href="#wynter-3" class="c-wynter">Man2, the economic human</a></li><li class="sub"><a href="#wynter-4" class="c-wynter">The archipelago of Human Otherness</a></li><li class="grp"><a href="#crc" class="c-crc"><i class="ico crc"></i>Koshy et al.</a></li><li class="sub"><a href="#crc-1" class="c-crc">Racial capitalism</a></li><li class="sub"><a href="#crc-2" class="c-crc">Recursive dispossession</a></li><li class="sub"><a href="#crc-3" class="c-crc">The racial alchemy of debt</a></li><li class="sub"><a href="#crc-4" class="c-crc">Colonial unknowing</a></li><li class="grp"><a href="#examples" class="c-film"><i class="ico ex"></i>Three examples</a></li><li class="sub"><a href="#ex-1" class="c-film">Silk stands for opium</a></li><li class="sub"><a href="#ex-2" class="c-film">Leveler Rings</a></li><li class="sub"><a href="#ex-3" class="c-film">Parasite</a></li><li class="grp"><a href="#after"><i class="ico pill"></i>Conclusion</a></li><li class="grp"><a href="#keywords"><i class="ico q"></i>Keyword bank</a></li><li class="grp"><a href="#cited"><i class="ico q"></i>Works cited</a></li><li class="grp"><a class="strong" href="about.html"><i class="ico pill"></i>About this project</a></li></ul></aside>
+<div class="wrap">
+
+<header class="top" id="top" style="scroll-margin-top:90px">
+  <p class="soft">Alternative Mid-Term · Concept Map</p>
+  <h1>Who Counts as Human?</h1>
+  <p>A flow chart of the concept <b>Man / the Human</b> across Unit 1, “Living in a Liberal Human World”: how a European, middle-class idea of “Man” comes to stand for all of humanity, and what that idea needs other people to be.</p>
+  <p class="byline"><span>Jennie Kwon</span><span>Critical Globalisms</span><span>Prof. Sunhay You</span><span>Fall 2026</span></p>
+  <div class="legend" aria-label="Shape key">
+    <span><i class="ico q"></i>Texts</span>
+    <span class="c-lowe"><i class="ico lowe"></i><span><b>Lisa Lowe</b>, <i>The Intimacies of Four Continents</i></span></span>
+    <span class="c-wynter"><i class="ico wynter"></i><span><b>Sylvia Wynter</b>, “Unsettling the Coloniality of Being”</span></span>
+    <span class="c-crc"><i class="ico crc"></i><span><b>Koshy et al., eds.</b>, <i>Colonial Racial Capitalism</i></span></span>
+    <span><i class="ico ex"></i>Example</span>
+  </div>
+  <div class="about">
+    <p><b>What this map does</b></p>
+    <ul>
+      <li>Traces how the concept <b>Man / the Human</b> and its related terms change meaning across Lowe, Wynter, and <i>Colonial Racial Capitalism</i>.</li>
+      <li>Grounds every idea in a direct quotation and unpacks each key term in it.</li>
+      <li>Gives three examples: two from the readings and one beyond them, two scenes from <i>Parasite</i>.</li>
+    </ul>
+  </div>
+</header>
+
+<section id="meanings" style="scroll-margin-top:90px">
+  <div class="sec-head">
+    <h2><i class="ico q"></i>How the meaning of “Man / the Human” develops</h2>
+    <p>Five meanings, in historical order. Wynter’s two stages of Man frame Lowe’s liberal man, who appears at the turn from Man1 to Man2, and <i>Colonial Racial Capitalism</i> shows the result today. Click a step to read the passage behind it.</p>
+  </div>
+  <ol class="steps">
+    <li><button class="shape s-text t-wynter" data-open="wynter-2" type="button"><span class="in"><i class="ico wynter"></i><span class="num">1</span><span class="t">Christian</span><span class="src">Medieval Latin-Christian Europe</span><span>The human as “the religious subject of the Church.”</span><span class="soft">Wynter 265</span></span></button></li>
+    <li><button class="shape s-text t-wynter" data-open="wynter-2" type="button"><span class="in"><i class="ico wynter"></i><span class="num">2</span><span class="t">Man1</span><span class="src">Renaissance to the 18th century</span><span>Man “as political subject” of the state, defined by reason.</span><span class="soft">Wynter 263–64, 318</span></span></button></li>
+    <li><button class="shape s-text t-lowe" data-open="lowe-1" type="button"><span class="in"><i class="ico lowe"></i><span class="num">3</span><span class="t">Liberal man</span><span class="src">Late 18th to early 19th century</span><span>The free individual of rights, wage labor, and free trade, defined against the “unfree.”</span><span class="soft">Lowe 3, 6</span></span></button></li>
+    <li><button class="shape s-text t-wynter" data-open="wynter-3" type="button"><span class="in"><i class="ico wynter"></i><span class="num">4</span><span class="t">Man2</span><span class="src">Late 18th century to today</span><span>Man “as a bio-economic subject”: the Breadwinner and the Investor.</span><span class="soft">Wynter 318, 321</span></span></button></li>
+    <li><button class="shape s-text t-crc" data-open="crc-1" type="button"><span class="in"><i class="ico crc"></i><span class="num">5</span><span class="t">The human as value</span><span class="src">Today</span><span>Life ranked by whether it has “value or meaning for westernized-man.”</span><span class="soft">Koshy et al. 6</span></span></button></li>
+  </ol>
+</section>
+
+<section id="map" aria-label="Flow chart" style="scroll-margin-top:90px">
+  <div class="sec-head"><h2><i class="ico q"></i>The flowchart</h2><p>Each diamond asks a question; the arrows branch to how each text answers it. Click any shape to expand it.</p></div>
+  <div class="chart-scroll">
+  <div class="chart" id="chart">
+    <svg class="wires" id="wires" aria-hidden="true"></svg>
+
+    <div class="pill start" data-k="start"><span class="t">Start: Man / the Human</span><span class="soft">one group’s picture of a person, treated as everyone’s</span></div>
+    <div class="gap"></div>
+
+    <div class="frame">
+      <span class="frame-label">Reading across Unit 1</span>
+      <span class="frame-label left">Each question branches into the three texts</span>
+      <button class="diamond" data-k="q1" data-q="q1" type="button"><span class="in"><span class="n">Question 1</span><span class="t">Who gets to define “the human”?</span></span></button>
+      <div class="gap"></div>
+      <div class="row3"><div class="tt tt-node c-lowe" data-k="h-lowe"><i class="ico lowe"></i><span class="tt-author">Lisa Lowe</span><span class="tt-book"><i>The Intimacies of Four Continents</i></span><span class="tt-meta">2015 · Chapters 1, 3, 5</span></div><div class="tt tt-node c-wynter" data-k="h-wynter"><i class="ico wynter"></i><span class="tt-author">Sylvia Wynter</span><span class="tt-book">“Unsettling the Coloniality of Being/<wbr>Power/<wbr>Truth/<wbr>Freedom”</span><span class="tt-meta">2003 · “Towards the Human, After Man”</span></div><div class="tt tt-node c-crc" data-k="h-crc"><i class="ico crc"></i><span class="tt-author">Koshy, Cacho, Byrd, and Jefferson, editors</span><span class="tt-book"><i>Colonial Racial Capitalism</i></span><span class="tt-meta">2022 · Intro, Chapters 2, 3, 8</span></div></div>
+      <div class="gap sm"></div>
+      <div class="row3">
+        <button class="shape s-text t-lowe" data-k="lowe-1" data-open="lowe-1" type="button"><span class="in"><i class="ico lowe"></i><span class="src">Chapter 1</span><span class="t">Liberal universalism</span><span class="kw"><span>liberal universalism</span><span>condition of possibility</span></span></span></button>
+        <button class="shape s-text t-wynter" data-k="wynter-1" data-open="wynter-1" type="button"><span class="in"><i class="ico wynter"></i><span class="src">pp. 260–62</span><span class="t">The overrepresentation of Man</span><span class="kw"><span>overrepresentation</span><span>ethnoclass</span><span>descriptive statement</span></span></span></button>
+        <button class="shape s-text t-crc" data-k="crc-1" data-open="crc-1" type="button"><span class="in"><i class="ico crc"></i><span class="src">Introduction</span><span class="t">Racial capitalism</span><span class="kw"><span>racial capitalism</span><span>differentiation</span></span></span></button>
+      </div>
+      <div class="gap"></div>
+      <button class="diamond" data-k="q2" data-q="q2" type="button"><span class="in"><span class="n">Question 2</span><span class="t">Who is pushed outside of it?</span></span></button>
+      <div class="gap"></div>
+      <div class="row3">
+        <button class="shape s-text t-lowe" data-k="lowe-2" data-open="lowe-2" type="button"><span class="in"><i class="ico lowe"></i><span class="src">Chapter 1</span><span class="t">Colonial divisions of humanity</span><span class="kw"><span>colonial divisions of humanity</span><span>race as remainder</span></span></span></button>
+        <button class="shape s-text t-wynter" data-k="wynter-2" data-open="wynter-2" type="button"><span class="in"><i class="ico wynter"></i><span class="src">pp. 263–66</span><span class="t">Man1 and the Human Other</span><span class="kw"><span>Man1</span><span>matrix slot of Otherness</span><span>Human Other</span></span></span></button>
+        <button class="shape s-text t-crc" data-k="crc-2" data-open="crc-2" type="button"><span class="in"><i class="ico crc"></i><span class="src">Introduction; Goldstein, Ch. 2</span><span class="t">Recursive dispossession</span><span class="kw"><span>recursive dispossession</span><span>filius nullius / terra nullius</span><span>social reproduction</span></span></span></button>
+      </div>
+      <div class="gap"></div>
+      <button class="diamond" data-k="q3" data-q="q3" type="button"><span class="in"><span class="n">Question 3</span><span class="t">What does being “fully human” require?</span></span></button>
+      <div class="gap"></div>
+      <div class="row3">
+        <button class="shape s-text t-lowe" data-k="lowe-3" data-open="lowe-3" type="button"><span class="in"><i class="ico lowe"></i><span class="src">Chapters 1 and 3</span><span class="t">Colonial division of intimacy</span><span class="kw"><span>intimacy</span><span>possessive individual</span></span></span></button>
+        <button class="shape s-text t-wynter" data-k="wynter-3" data-open="wynter-3" type="button"><span class="in"><i class="ico wynter"></i><span class="src">pp. 318–21</span><span class="t">Man2, the economic human</span><span class="kw"><span>Man2</span><span>Natural Scarcity</span><span>Breadwinner and Investor</span></span></span></button>
+        <button class="shape s-text t-crc" data-k="crc-3" data-open="crc-3" type="button"><span class="in"><i class="ico crc"></i><span class="src">Harris, Chapter 3</span><span class="t">The racial alchemy of debt</span><span class="kw"><span>racial alchemy</span><span>predatory inclusion</span></span></span></button>
+      </div>
+      <div class="gap"></div>
+      <button class="diamond" data-k="q4" data-q="q4" type="button"><span class="in"><span class="n">Question 4</span><span class="t">What gets hidden?</span></span></button>
+      <div class="gap"></div>
+      <div class="row3">
+        <button class="shape s-text t-lowe" data-k="lowe-4" data-open="lowe-4" type="button"><span class="in"><i class="ico lowe"></i><span class="src">Chapters 1, 3, and 5</span><span class="t">Affirmation and forgetting</span><span class="kw"><span>economy of affirmation and forgetting</span><span>archive</span><span>past conditional temporality</span></span></span></button>
+        <button class="shape s-text t-wynter" data-k="wynter-4" data-open="wynter-4" type="button"><span class="in"><i class="ico wynter"></i><span class="src">pp. 321–25</span><span class="t">The archipelago of Human Otherness</span><span class="kw"><span>archipelago of Human Otherness</span><span>dysselected</span></span></span></button>
+        <button class="shape s-text t-crc" data-k="crc-4" data-open="crc-4" type="button"><span class="in"><i class="ico crc"></i><span class="src">Day, Chapter 8</span><span class="t">Colonial unknowing</span><span class="kw"><span>colonial unknowing</span><span>antipolitics</span><span>nonsite</span></span></span></button>
+      </div>
+    </div>
+
+    <div class="gap"></div>
+    <button class="diamond" data-k="q5" data-q="q5" type="button"><span class="in"><span class="n">Question 5</span><span class="t">Where does this show up in the world?</span></span></button>
+    <div class="gap"></div>
+    <div class="row3">
+      <button class="shape s-ex" data-k="ex-1" data-open="ex-1" type="button"><span class="in"><img class="thumb" src="img/chintz.jpg" alt="" loading="lazy" draggable="false"><i class="ico ex"></i><span class="src">Example 1 · Lowe, Chapter 3</span><span class="t">Silk stands for opium</span><span class="kw"><span>colonial commodity</span><span>metaphor</span></span></span></button>
+      <button class="shape s-ex" data-k="ex-2" data-open="ex-2" type="button"><span class="in"><img class="thumb" src="img/rowland.jpg" alt="" loading="lazy" draggable="false"><i class="ico ex"></i><span class="src">Example 2 · Harris, with Wynter</span><span class="t"><i>Leveler Rings</i></span><span class="kw"><span>afterlives of slavery</span><span>racelessness</span></span></span></button>
+      <button class="shape s-ex" data-k="ex-3" data-open="ex-3" type="button"><span class="in"><img class="thumb" src="img/parasite-sofa.jpg" alt="" loading="lazy" draggable="false"><i class="ico ex"></i><span class="src">Example 3 · Bong Joon Ho, 2019</span><span class="t"><i>Parasite</i></span><span class="kw"><span>the line</span><span>the smell</span><span>the flood</span></span></span></button>
+    </div>
+    <div class="gap"></div>
+    <button class="pill end" data-k="end" data-open="after-1" type="button"><span class="t">End: toward the human, after Man</span><span>Lowe’s “other humanities” · Wynter’s Human after Man · Day’s queer art of failure</span></button>
+  </div>
+  </div>
+  <p class="soft chart-note">On a small screen, scroll the chart sideways.</p>
+</section>
+
+<!-- WRITTEN COMPONENT -->
+<section id="lowe" class="col" style="scroll-margin-top:90px">
+  <div class="sec-head">
+    <div class="tt c-lowe"><i class="ico lowe"></i><span class="tt-author">Lisa Lowe</span><span class="tt-book"><i>The Intimacies of Four Continents</i></span><span class="tt-meta">Duke University Press, 2015 · Chapters 1, 3, and 5</span></div>
+    <h2 class="c-lowe">The liberal human</h2>
+    <p>Chapters 1, 3, and 5 of <i>The Intimacies of Four Continents</i> treat “the human” as a product of liberal philosophy, the colonial archive, and the trade in goods and people that connected Europe, Africa, Asia, and the Americas.</p>
+  </div>
+
+  <article id="lowe-1" class="entry lowe-e" data-title="Liberal universalism">
+    <p class="lbl">Chapter 1</p>
+    <h3>Liberal universalism</h3>
+    <blockquote>“the modern distinction between definitions of the human and those to whom such definitions do not extend is the condition of possibility for Western liberalism, and not its particular exception” <cite>(Lowe 3)</cite></blockquote>
+    <p>Lowe opens by reversing the familiar story in which liberalism gradually extends freedom to everyone. A <b>definition of the human</b> is already an act of sorting, since to define is to draw an edge. The phrase <b>condition of possibility</b> means that the excluded are the ground on which the liberal subject stands. Thus slavery, settlement, and indenture are not a <b>particular exception</b>, a lapse that progress will eventually correct; they are the structure that lets liberal freedom be imagined at all.</p>
+  </article>
+
+  <article id="lowe-2" class="entry lowe-e" data-title="Colonial divisions of humanity">
+    <p class="lbl">Chapter 1</p>
+    <h3>Colonial divisions of humanity</h3>
+    <blockquote>“as modern liberalism defined the ‘human’ and universalized its attributes to European man, it simultaneously differentiated populations in the colonies as less than human” <cite>(Lowe 6)</cite></blockquote>
+    <p>The key word is <b>simultaneously</b>: universalizing and differentiating are one gesture, not two. To <b>universalize</b> is to take the attributes of one figure, <b>European man</b>, and present them as humanity’s own. The <b>colonial divisions of humanity</b> are the resulting distances from that figure, which Lowe lists as “Indian,” “Black,” “Negro,” “Chinese,” and “coolie” (8). Moreover, she calls race “an enduring remainder” of this process (7). A <b>remainder</b> is what is left over once the human has been “freed,” a residue that keeps returning to unsettle liberalism’s claim to be finished.</p>
+  </article>
+
+  <article id="lowe-3" class="entry lowe-e" data-title="Colonial division of intimacy">
+    <p class="lbl">Chapters 1 and 3</p>
+    <h3>Colonial division of intimacy</h3>
+    <blockquote>“a colonial division of intimacy, which charts the historically differentiated access to the domains of liberal personhood, from interiority and individual will, to the possession of property and domesticity” <cite>(Lowe 18)</cite></blockquote>
+    <p>Lowe uses <b>intimacy</b> as a heuristic with two senses. In its dominant sense it is the private life of what C. B. Macpherson called “the possessive individual” (18): marriage, family, the bourgeois home. In an older, now rare sense it means “close connexion” (19), which Lowe extends to the alliances among enslaved, Indigenous, and colonized peoples across continents. <b>Differentiated access</b> shows that <b>interiority</b> (an inner life), individual <b>will</b>, property, and <b>domesticity</b> (the household) are rationed goods. Consequently, Man is the one permitted an inside and a home, while the laborers who furnish that home are kept outside it.</p>
+  </article>
+
+  <article id="lowe-4" class="entry lowe-e" data-title="Affirmation and forgetting">
+    <p class="lbl">Chapters 1, 3, and 5</p>
+    <h3>The economy of affirmation and forgetting</h3>
+    <blockquote>“the economy of affirmation and forgetting that structures and formalizes the archives of liberalism, and liberal ways of understanding. This economy civilizes and develops freedoms for ‘man’ in modern Europe and North America, while relegating others to geographical and temporal spaces that are constituted as backward, uncivilized, and unfree” <cite>(Lowe 3)</cite></blockquote>
+    <p><b>Economy</b> implies an exchange: every affirmation of liberal progress is paid for with a forgetting. The <b>archive</b> is not neutral storage; Lowe describes the British National Archives as divided by office and region, with separate records for settlement, the slave trade, abolition, and Chinese emigration, so that their connections are hard to read (5). The paired verbs <b>civilizes</b> and <b>relegating</b> show the two directions of this economy: it raises some people into “civilization” and pushes others down and away. The word <b>temporal</b> matters as well, because the “unfree” are placed in the past, behind Europe. In Chapter 5 Lowe answers with a <b>past conditional temporality</b>, a way of reading for “what could have been” that treats the past as “a configuration of multiple contingent possibilities, all present, yet none inevitable” (175).</p>
+  </article>
+</section>
+
+<section id="wynter" class="col" style="scroll-margin-top:90px">
+  <div class="sec-head">
+    <div class="tt c-wynter"><i class="ico wynter"></i><span class="tt-author">Sylvia Wynter</span><span class="tt-book">“Unsettling the Coloniality of Being/<wbr>Power/<wbr>Truth/<wbr>Freedom: Towards the Human, After Man, Its Overrepresentation—An Argument”</span><span class="tt-meta"><i>CR: The New Centennial Review</i>, 2003</span></div>
+    <h2 class="c-wynter">Man and its Others</h2>
+    <p>Where Lowe describes the division, Wynter names its engine. She argues that Europe rewrote its idea of the human twice: “as Christian becomes Man1 (as political subject), then as Man1 becomes Man2 (as a bio-economic subject)” (318), and each time a new population was made to stand for the Other.</p>
+  </div>
+
+  <article id="wynter-1" class="entry wynter-e" data-title="The overrepresentation of Man">
+    <p class="lbl">pp. 260–62</p>
+    <h3>The overrepresentation of Man</h3>
+    <blockquote>“our present ethnoclass (i.e., Western bourgeois) conception of the human, Man, which overrepresents itself as if it were the human itself” <cite>(Wynter 260)</cite></blockquote>
+    <p><b>Ethnoclass</b> fuses ethnicity and class: Man is the self-image of one specific Western bourgeois group. To <b>overrepresent</b> is to fill the whole frame with that one genre of being human, and <b>as if</b> marks the fiction. Wynter calls such a self-image a <b>descriptive statement</b> (262), a culture’s working answer to the question of who and what we are. Therefore, she frames the central struggle of our time as the “Man vs. Human struggle” (261), which links Lowe’s “particular” liberal subject to a claim about the whole species.</p>
+  </article>
+
+  <article id="wynter-2" class="entry wynter-e" data-title="Man1 and the Human Other">
+    <p class="lbl">pp. 263–66</p>
+    <h3>Man1: the political subject and the Human Other</h3>
+    <blockquote>the peoples of the Americas and of Black Africa “were made to reoccupy the matrix slot of Otherness—to be made into the physical referent of the idea of the irrational/subrational Human Other” <cite>(Wynter 266)</cite></blockquote>
+    <p>In <b>Man1</b>, Renaissance humanism and the rising state replace the “True Christian Self” with Man as “the political subject of the state” (263). The <b>matrix slot</b> is a structural position older than its occupants: in medieval Christendom it held heretics and infidels, and from the sixteenth century onward it is filled by “Indians” and “Negroes” (265–66). A <b>physical referent</b> is a body drafted to make an abstract idea visible. The pairing <b>irrational/subrational</b> marks the new dividing line: where the Christian Other lacked true faith, Man1’s Other is said to lack reason, or to have less of it. Thus Wynter supplies the mechanism behind Lowe’s “less than human”: the slot exists first, and colonial violence fills it.</p>
+  </article>
+
+  <article id="wynter-3" class="entry wynter-e" data-title="Man2, the economic human">
+    <p class="lbl">pp. 318–21</p>
+    <h3>Man2: the economic human</h3>
+    <blockquote>“Man2 is now defined as a jobholding Breadwinner, and even more optimally, as a successful ‘masterer of Natural Scarcity’ (Investor, or capital accumulator)” <cite>(Wynter 321)</cite></blockquote>
+    <p>After Malthus and Darwin, Man takes what Wynter calls a “purely biocentric and homo oeconomicus form” (282). <b>Natural Scarcity</b> replaces Original Sin as the “significant ill,” so salvation becomes material rather than spiritual (320). The <b>Breadwinner</b> is the minimum standard of full humanity, and the <b>Investor</b> is its ideal. Consequently, whoever fails economically is read as having failed to be fully human, which is the point where Wynter meets racial capitalism.</p>
+  </article>
+
+  <article id="wynter-4" class="entry wynter-e" data-title="The archipelago of Human Otherness">
+    <p class="lbl">pp. 321–25</p>
+    <h3>The archipelago of Human Otherness</h3>
+    <blockquote>“the new descriptive statement of the human will call for its archipelago of Human Otherness to be peopled by a new category, one now comprised of the jobless, the homeless, the Poor, the systemically made jobless and criminalized” <cite>(Wynter 321)</cite></blockquote>
+    <p>An <b>archipelago</b> is a chain of islands: scattered and separated, yet one system. The phrase <b>systemically made</b> insists that joblessness is produced, not natural. Wynter adds the psychic cost of this order: the “dysselected” become the mode of non-being “that each individual and group must strive to avoid, struggle to prove that they themselves are not, if they are to be” (325). In the end, this is the idea that <i>Parasite</i> dramatizes.</p>
+  </article>
+</section>
+
+<section id="crc" class="col" style="scroll-margin-top:90px">
+  <div class="sec-head">
+    <div class="tt c-crc"><i class="ico crc"></i><span class="tt-author">Koshy, Cacho, Byrd, and Jefferson, editors</span><span class="tt-book"><i>Colonial Racial Capitalism</i></span><span class="tt-meta">Duke University Press, 2022 · Introduction and Chapters 2, 3, and 8</span></div>
+    <h2 class="c-crc">The human as value</h2>
+    <p>The introduction, Goldstein (Chapter 2), Harris (Chapter 3), and Day (Chapter 8) show how the division between Man and its Others is carried out through land, family, debt, and technology.</p>
+  </div>
+
+  <article id="crc-1" class="entry crc-e" data-title="Racial capitalism">
+    <p class="lbl">Introduction</p>
+    <h3>Racial capitalism</h3>
+    <blockquote>“The tendency of European civilization through capitalism was thus not to homogenize but to differentiate—to exaggerate regional, subcultural, and dialectical differences into ‘racial’ ones.” <cite>(Robinson, qtd. in Koshy et al. 2)</cite></blockquote>
+    <p><b>Racial capitalism</b>, as the editors take it from Cedric Robinson, argues that racism is not added onto capitalism. Capitalism does not <b>homogenize</b>, or make everyone the same; it works through <b>differentiation</b>, turning ordinary local differences into ranked “racial” ones. Following Robinson, they explain that racial logics name the differences behind inequality as innate, “as ‘biological,’ ‘cultural,’ ‘environmental,’ and so forth” (2). Drawing on Ruth Wilson Gilmore, they add that “racial does not necessarily mean Black or require white” (2). Furthermore, they cite Chandan Reddy, whose description of life that “exists without value or meaning for westernized-man” (6) joins this branch to Wynter’s.</p>
+  </article>
+
+  <article id="crc-2" class="entry crc-e" data-title="Recursive dispossession">
+    <p class="lbl">Introduction, pp. 5–7, and Goldstein, Chapter 2</p>
+    <h3>Recursive dispossession and social reproduction</h3>
+    <blockquote>“Racial capitalism is colonial capitalism, especially where settler and imperial thefts of land, the production of hierarchies of global space, and the expropriation of labor occur by means of recursive processes that require possession and rights in order to produce dispossession and rightlessness.” <cite>(Koshy et al. 7)</cite></blockquote>
+    <p><b>Recursive</b> processes loop back on themselves: following Rob Nichols, the editors explain that land is first turned into property so that it can be taken, and that dispossession “produces what it presupposes” (5). <b>Possession and rights</b>, the goods of liberal Man, become the very instruments of <b>rightlessness</b>. <b>Hierarchies of global space</b> rank whole regions as developed or “backward,” which, the editors note, lets dispossession be renamed “a problem of development” (3). Goldstein carries this into family life: the notion of <i>filius nullius</i> (“nobody’s child”) in the removal of Native children works alongside <i>terra nullius</i> in land policy (16), and inheritance law has broken up Native and Black landholding. For him, <b>social reproduction</b> is “a dialectical relation that distributes attributions of disposability and premature death” (76–77).</p>
+  </article>
+
+  <article id="crc-3" class="entry crc-e" data-title="The racial alchemy of debt">
+    <p class="lbl">Cheryl I. Harris, Chapter 3</p>
+    <h3>The racial alchemy of debt</h3>
+    <blockquote>“debt functions as a form of racial alchemy: it obscures highly racialized processes and racially differentiated burdens, and it normalizes and makes available for generalized application ever-more-rapacious and predatory forms of extraction” <cite>(Harris 95)</cite></blockquote>
+    <p><b>Alchemy</b> is the false science of turning one substance into another; here a formally race-neutral instrument turns racial subordination into an asset. Although abolition ended the value of Black people as property, Harris writes, “the racial alchemy of debt transformed freed people into assets yet again” (93). <b>Predatory inclusion</b> names “an illusory project of racial liberalism” that offers inclusion in the market as the cure for Black subordination (96). <b>Extraction</b> means drawing value out of people without return, and Harris warns that once these methods are normalized they become available for “generalized application,” spreading beyond the groups they first targeted. Thus Wynter’s Investor and his debtor are produced together, as two sides of one ledger.</p>
+  </article>
+
+  <article id="crc-4" class="entry crc-e" data-title="Colonial unknowing">
+    <p class="lbl">Iyko Day, Chapter 8</p>
+    <h3>Colonial unknowing</h3>
+    <blockquote>“the antipolitical frame of technopolitics reveals the coordinated expansion and technological intensification of imperial state power that is secured through its simultaneous depoliticization” <cite>(Day 258)</cite></blockquote>
+    <p>Day begins with Obama’s 2016 Hiroshima speech, which turned the bomb into a lesson about “humanity’s core contradiction” (257), a universal humanity once more. <b>Technopolitics</b> is politics carried out through technology; Day argues that after decolonization, relations between colonizer and colonized were remade as relations between the nuclear and the non-nuclear (258). <b>Antipolitics</b> and <b>depoliticization</b> describe how that power is framed as neutral technology, nobody’s decision. The result is what Day, citing Vimalassery, Pegues, and Goldstein, calls <b>colonial unknowing</b> (258): the uranium that came from the Belgian Congo and Canada’s Northwest Territories disappears behind the mushroom cloud, and Indigenous lands become <b>nonsites</b> of nuclear modernity (258–59). This is Lowe’s economy of forgetting in a nuclear register.</p>
+  </article>
+</section>
+
+<section id="examples" class="col" style="scroll-margin-top:90px">
+  <div class="sec-head">
+    <h2><i class="ico ex"></i>Three examples</h2>
+    <p>Two examples come from the readings; the third, <i>Parasite</i>, carries the concept beyond the texts.</p>
+  </div>
+
+  <article id="ex-1" class="entry film-e" data-title="Example 1: Silk stands for opium">
+    <p class="lbl">Example 1 · Lisa Lowe, Chapter 3</p>
+    <h3>Silk stands for opium</h3>
+    <figure class="fig"><img src="img/chintz.jpg" alt="A chintz palampore: a large painted and dyed cotton hanging with a flowering tree rising from a mound, framed by a floral border." loading="lazy" draggable="false"><figcaption>Chintz palampore, painted and dyed cotton (c. 1750), Coromandel coast, India. © Victoria and Albert Museum, London. Reproduced from Lowe, figure 3.1 (72). Lowe pairs this image with Chapter 3, where the chintz bed curtains and silk dresses of <i>Vanity Fair</i> carry the colonial trade behind them.</figcaption></figure>
+    <blockquote>Joshua Bates “identified himself by saying, ‘I am a silk trader,’ which meant, ‘I trade in opium’” <cite>(Lowe 97)</cite></blockquote>
+    <p>In testimony to the Parliamentary Select Committee on the China trade, silk was the legitimate cargo that screened the illicit opium trade: opium sold in Canton paid for the silk shipped home (96–97). Lowe sets this beside Thackeray’s <i>Vanity Fair</i>, where Becky Sharp’s pink dress “looked as fresh as a rose” (96). <b>Metaphor</b> carries meaning from one thing to another, and Lowe reads it as a model of commodity exchange, a process that “both evokes through equivalence and occludes through exchange” (97). Consequently, the English drawing room, the dominant form of intimacy, is furnished by India’s opium farmers, enslaved cotton pickers in the American South, and the “coolie” trade that grew after the Opium Wars (97–98). This example demonstrates the full concept: Man’s private life is built from labor the archive forgets, and the consumer at its center is already Wynter’s economic Man.</p>
+  </article>
+
+  <article id="ex-2" class="entry film-e" data-title="Example 2: Leveler Rings">
+    <p class="lbl">Example 2 · Cheryl I. Harris, Chapter 3, with Wynter</p>
+    <h3>Cameron Rowland’s <i>Leveler Rings</i></h3>
+    <figure class="fig"><img src="img/rowland.jpg" alt="A white gallery with large windows; stacked aluminum rings lie on the floor at left and two firefighter jackets hang on the right wall." loading="lazy" draggable="false"><figcaption>Cameron Rowland, <i>91020000</i>, installation view, Artists Space, New York, 2016; the stacked rings at left are <i>Leveler (Extension) Rings for Manhole Openings</i>. Courtesy of the artist and Maxwell Graham/Essex Street, New York. Reproduced from Harris, figure 3.1 (89).</figcaption></figure>
+    <blockquote>“Manhole leveler rings are cast by prisoners in Elmira Correctional Facility. […] The road is a public asset, instrumental to commercial development.” <cite>(Rowland, qtd. in Harris 89–90)</cite></blockquote>
+    <p>Harris opens with a work from Rowland’s 2016 exhibition <i>91020000</i>: large stacked aluminum rings, “stubbornly ordinary” (89), cast by prisoners paid between $0.10 and $1.14 an hour (90). The rings keep the road smooth, a <b>public asset</b> held for everyone yet built by people with almost no rights, and the object presents itself as raceless. Yet Harris insists that “the racelessness of the object is illusory” (90), because its genealogy “begins with enslavement and extends through its many afterlives” (90), including convict leasing and the chain gang. Like Bates’s silk, the ring hides the labor inside it. Moreover, the example joins Wynter and Harris: the “criminalized” members of Wynter’s archipelago are put to work, and debt and incarceration are the infrastructure that keeps them there. The Nas lyric among Wynter’s epigraphs, about taxpayers paying for more jails for Black and Latino people (258), states the same relation from the street.</p>
+  </article>
+
+  <article id="ex-3" class="entry film-e" data-title="Example 3: Parasite">
+    <p class="lbl">Example 3 · Bong Joon Ho, <i>Parasite</i> (2019)</p>
+    <h3>The line, the smell, the flood</h3>
+    <figure class="fig"><img src="img/parasite-section.svg" alt="Section diagram: the Parks’ house on high ground above a dashed line labeled “the line,” a bunker beneath it, stairs leading down to the Kims’ semi-basement, which sits half below the street and is filling with flood water under the rain." loading="lazy" draggable="false"><figcaption>Diagram of the film’s vertical geography, after Bong Joon Ho, <i>Parasite</i> (2019). The Parks live above “the line”; Geun-sae hides in the bunker beneath their house; the Kims’ semi-basement sits half below the street and floods in the rain.</figcaption></figure>
+    <div class="scene">
+      <h4>Scene A · Under the coffee table</h4>
+      <figure class="fig"><img src="img/parasite-sofa.jpg" alt="Mr. and Mrs. Park lie on a long gray sofa behind a low wooden coffee table; through the glass wall, a striped teepee stands on the lawn at night." loading="lazy" draggable="false"><figcaption>Mr. and Mrs. Park on their living-room sofa, with their son’s teepee in the garden. In Scene A, the Kims hide under the coffee table in front of them. © 2019 CJ ENM Corporation, Barunson E&A. Film still via Festival de Cannes.</figcaption></figure>
+      <p>Hidden beneath the Parks’ living-room table, the Kim family listens as Mr. Park tells his wife that their driver, Ki-taek, never crosses the line, but that his smell “crosses the line.” He compares it to an old radish and to the smell of people on the subway. The <b>line</b> is Wynter’s line between Man and its Human Other, and the smell, which the semi-basement leaves in Ki-taek’s clothes, is exactly the kind of “biological” difference the editors describe: a class difference treated as a fact of the body. Moreover, the staging literalizes Lowe’s colonial division of intimacy. The Kims are physically closer to the Parks than anyone, yet they lie beneath the household’s private life, and the couple’s intimate moment rests on top of them. Meanwhile, the Kims’ whole scheme of forged documents and invented credentials is Wynter’s “struggle to prove that they themselves are not.”</p>
+    </div>
+    <div class="scene">
+      <h4>Scene B · The flood and the party</h4>
+      <figure class="fig"><img src="img/parasite-window.jpg" alt="A view out through a low, barred window at pavement level: figures on the street outside are caught in bright splashes of water at night." loading="lazy" draggable="false"><figcaption>The street seen through the Kims’ semi-basement window, which sits at pavement level. In Scene B, the rain floods this half-underground home. © 2019 CJ ENM Corporation, Barunson E&A. Film still via Festival de Cannes.</figcaption></figure>
+      <p>That night the rain floods the Kims’ semi-basement with sewage, and the family sleeps in a gymnasium among other evacuees. The next morning Mrs. Park cheerfully mentions the clear, dust-free sky the rain has left and prepares a garden party. One storm produces two worlds: Wynter’s <b>Natural Scarcity</b> falls along class lines, and the Parks’ ignorance of the flood resembles Day’s <b>colonial unknowing</b> on the scale of a single city. Beneath the house, Geun-sae, who has hidden in the bunker for years from loan sharks, taps out “Respect!” to Mr. Park with the lights; he is Harris’s debtor, underground and invisible, honoring Wynter’s “masterer of Natural Scarcity.” Finally, Ki-woo’s plan to earn enough money to buy the house plays out as a fantasy before the film returns him to the semi-basement. In Lowe’s terms, it is a past conditional that liberal mobility cannot fulfill.</p>
+    </div>
+  </article>
+</section>
+
+<section id="after" class="col" style="scroll-margin-top:90px">
+  <div class="sec-head">
+    <h2><i class="ico pill"></i>Conclusion: toward the human, after Man</h2>
+  </div>
+  <article id="after-1" class="entry lowe-e" data-title="Conclusion: toward the human, after Man">
+    <p class="lbl">Lowe, Wynter, and Day</p>
+    <h3>Other humanities</h3>
+    <blockquote>“We are left with the project of imagining, mourning, and reckoning ‘other humanities’ within the received genealogy of ‘the human.’” <cite>(Lowe 175)</cite></blockquote>
+    <p>Each text ends by refusing to complete Man’s story. The <b>received genealogy</b> of “the human” is the inherited liberal history Lowe has traced, and to <b>reckon</b> with it is to account for what it cost. Lowe’s <b>other humanities</b> are plural, and they are to be imagined and mourned rather than recovered whole. Wynter’s title points “Towards the Human, After Man”: a species no longer defined by one ethnoclass. Day finds a model in Takahiro Iwasaki’s dioramas made of hair, towels, and toothbrushes, whose failure to be useful “represents a queer human temporality that resists absorption into the abstract temporality of the commodity form” (278). In the end, the concept of Man / the Human develops across these readings from a philosophical definition (Lowe) into a mechanism of Otherness (Wynter) and finally into a system of value, debt, and forgetting (<i>Colonial Racial Capitalism</i>). <i>Parasite</i> shows that the same mechanism now organizes life far from its European origin.</p>
+  </article>
+</section>
+
+<section id="keywords" class="col" style="scroll-margin-top:90px">
+  <div class="sec-head">
+    <h2><i class="ico q"></i>Keyword bank</h2>
+    <p>Key terms from each assigned chapter. Click a text to open its list.</p>
+  </div>
+  <div class="kw-list">
+    <details>
+      <summary class="c-lowe">Lisa Lowe, <i>The Intimacies of Four Continents</i></summary>
+      <div class="kw-body">
+        <div class="kw-ch"><p>Chapter 1, “The Intimacies of Four Continents”</p>
+          <div class="chips"><span>liberal universalism</span><span>colonial divisions of humanity</span><span>economy of affirmation and forgetting</span><span>archive of liberalism</span><span>colonial archive</span><span>genealogy</span><span>condition of possibility</span><span>race as remainder</span><span>“unfit for liberty”</span><span>settler colonialism</span><span>vacuum domicilium</span><span>“coolie” labor</span><span>intimacy: dominant, residual, emergent</span><span>colonial division of intimacy</span><span>possessive individual</span></div></div>
+        <div class="kw-ch"><p>Chapter 3, “A Fetishism of Colonial Commodities”</p>
+          <div class="chips"><span>colonial commodity</span><span>commodity fetishism</span><span>free trade imperialism</span><span>East India Company monopoly</span><span>tea, chintz, silk, opium</span><span>metaphor: equivalence and exchange</span><span><i>Vanity Fair</i></span><span>C. L. R. James</span><span>reading literature</span></div></div>
+        <div class="kw-ch"><p>Chapter 5, “Freedoms Yet to Come”</p>
+          <div class="chips"><span>history of the present</span><span><i>Nelson’s Ship in a Bottle</i></span><span>the unthinkable (Haitian Revolution)</span><span><i>The Black Jacobins</i></span><span><i>Black Reconstruction</i></span><span>past conditional temporality</span><span>“what could have been”</span><span>other humanities</span></div></div>
+      </div>
+    </details>
+    <details>
+      <summary class="c-wynter">Sylvia Wynter, “Unsettling the Coloniality of Being”</summary>
+      <div class="kw-body">
+        <div class="kw-ch"><p>Introduction, pp. 257–63</p>
+          <div class="chips"><span>overrepresentation</span><span>Man vs. Human</span><span>ethnoclass</span><span>descriptive statement</span><span>coloniality of being, power, truth, freedom</span><span>colonial difference (Mignolo)</span><span>the New Poor (Bauman)</span><span><i>les damnés</i> (Fanon)</span></div></div>
+        <div class="kw-ch"><p>Man1, the political subject</p>
+          <div class="chips"><span>invention of Man</span><span>“degodded”</span><span>True Christian Self / Untrue Other</span><span>rational / irrational master code</span><span>matrix slot of Otherness</span><span>Human Other</span><span>Las Casas and Sepúlveda</span><span>genre of being human</span><span>sociogeny</span></div></div>
+        <div class="kw-ch"><p>Man2, the bio-economic subject, pp. 318–26</p>
+          <div class="chips"><span>biocentric</span><span>homo oeconomicus</span><span>Natural Scarcity</span><span>Breadwinner and Investor</span><span>archipelago of Human Otherness</span><span>“dysselected by Evolution”</span><span>Liminal category</span></div></div>
+      </div>
+    </details>
+    <details>
+      <summary class="c-crc">Koshy, Cacho, Byrd, and Jefferson, <i>Colonial Racial Capitalism</i></summary>
+      <div class="kw-body">
+        <div class="kw-ch"><p>Introduction, pp. 1–14</p>
+          <div class="chips"><span>racial capitalism (Robinson)</span><span>differentiation</span><span>“what is the ‘racial’?” (Gilmore)</span><span>fallacy of developmentalism (Dussel)</span><span>hierarchies of global space</span><span>primitive accumulation as ongoing</span><span>recursive dispossession (Nichols)</span><span>land is life (Byrd)</span><span>capitalism as a colonial relation (Coulthard)</span></div></div>
+        <div class="kw-ch"><p>Chapter 2, Goldstein, “In the Constant Flux of Its Incessant Renewal”</p>
+          <div class="chips"><span>social reproduction</span><span>settler colonial entitlement</span><span><i>filius nullius</i> and <i>terra nullius</i></span><span>Indian Child Welfare Act</span><span>allotment and fractionation</span><span>heirs’ property</span><span>slow violence</span></div></div>
+        <div class="kw-ch"><p>Chapter 3, Harris, “The Racial Alchemy of Debt”</p>
+          <div class="chips"><span>racial alchemy</span><span>afterlives of slavery</span><span>debt peonage</span><span>convict leasing</span><span>“propertizing”</span><span>predatory inclusion</span><span>color-blindness</span><span><i>Leveler Rings</i></span></div></div>
+        <div class="kw-ch"><p>Chapter 8, Day, “Nuclear Antipolitics and the Queer Art of Logistical Failure”</p>
+          <div class="chips"><span>nuclear antipolitics</span><span>technopolitics</span><span>colonial unknowing</span><span>nonsite / nonsight</span><span>wastelanding (Voyles)</span><span>Anthropocene universalism</span><span>queer art of failure (Halberstam)</span><span>Iwasaki, <i>Out of Disorder</i></span></div></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section id="cited" class="col" style="scroll-margin-top:90px">
+  <div class="sec-head"><h2><i class="ico q"></i>Works cited</h2></div>
+  <div class="cited">
+    <p>Bong, Joon Ho, director. <i>Parasite</i>. CJ Entertainment, 2019.</p>
+    <p>Day, Iyko. “Nuclear Antipolitics and the Queer Art of Logistical Failure.” Koshy et al., pp. 257–83.</p>
+    <p>Goldstein, Alyosha. “‘In the Constant Flux of Its Incessant Renewal’: The Social Reproduction of Racial Capitalism and Settler Colonial Entitlement.” Koshy et al., pp. 60–87.</p>
+    <p>Harris, Cheryl I. “The Racial Alchemy of Debt: Dispossession and Accumulation in Afterlives of Slavery.” Koshy et al., pp. 88–130.</p>
+    <p>Koshy, Susan, Lisa Marie Cacho, Jodi A. Byrd, and Brian Jordan Jefferson, editors. <i>Colonial Racial Capitalism</i>. Duke UP, 2022.</p>
+    <p>Lowe, Lisa. <i>The Intimacies of Four Continents</i>. Duke UP, 2015.</p>
+    <p>Wynter, Sylvia. “Unsettling the Coloniality of Being/Power/Truth/Freedom: Towards the Human, After Man, Its Overrepresentation—An Argument.” <i>CR: The New Centennial Review</i>, vol. 3, no. 3, 2003, pp. 257–337.</p>
+  </div>
+</section>
+
+</div>
+
+</div>
+
+<dialog id="tocDlg" aria-label="Contents" lang="en">
+  <div class="dlg">
+    <div class="dlg-top"><b>Contents</b><button class="btn" id="tocClose" type="button">Close</button></div>
+    <div class="dlg-body"><ul class="toc"><li class="grp"><a href="#top" class="strong"><i class="ico pill"></i>Overview</a></li><li class="grp"><a href="#meanings"><i class="ico q"></i>How the meaning develops</a></li><li class="grp"><a href="#map"><i class="ico q"></i>The flowchart</a></li><li class="grp"><a href="#lowe" class="c-lowe"><i class="ico lowe"></i>Lisa Lowe</a></li><li class="sub"><a href="#lowe-1" class="c-lowe">Liberal universalism</a></li><li class="sub"><a href="#lowe-2" class="c-lowe">Colonial divisions of humanity</a></li><li class="sub"><a href="#lowe-3" class="c-lowe">Colonial division of intimacy</a></li><li class="sub"><a href="#lowe-4" class="c-lowe">Affirmation and forgetting</a></li><li class="grp"><a href="#wynter" class="c-wynter"><i class="ico wynter"></i>Sylvia Wynter</a></li><li class="sub"><a href="#wynter-1" class="c-wynter">The overrepresentation of Man</a></li><li class="sub"><a href="#wynter-2" class="c-wynter">Man1 and the Human Other</a></li><li class="sub"><a href="#wynter-3" class="c-wynter">Man2, the economic human</a></li><li class="sub"><a href="#wynter-4" class="c-wynter">The archipelago of Human Otherness</a></li><li class="grp"><a href="#crc" class="c-crc"><i class="ico crc"></i>Koshy et al.</a></li><li class="sub"><a href="#crc-1" class="c-crc">Racial capitalism</a></li><li class="sub"><a href="#crc-2" class="c-crc">Recursive dispossession</a></li><li class="sub"><a href="#crc-3" class="c-crc">The racial alchemy of debt</a></li><li class="sub"><a href="#crc-4" class="c-crc">Colonial unknowing</a></li><li class="grp"><a href="#examples" class="c-film"><i class="ico ex"></i>Three examples</a></li><li class="sub"><a href="#ex-1" class="c-film">Silk stands for opium</a></li><li class="sub"><a href="#ex-2" class="c-film">Leveler Rings</a></li><li class="sub"><a href="#ex-3" class="c-film">Parasite</a></li><li class="grp"><a href="#after"><i class="ico pill"></i>Conclusion</a></li><li class="grp"><a href="#keywords"><i class="ico q"></i>Keyword bank</a></li><li class="grp"><a href="#cited"><i class="ico q"></i>Works cited</a></li><li class="grp"><a class="strong" href="about.html"><i class="ico pill"></i>About this project</a></li></ul></div>
+    <div></div>
+  </div>
+</dialog>
+
+<dialog id="reader" aria-labelledby="dlgWhere" lang="en">
+  <div class="dlg">
+    <div class="dlg-top">
+      <span class="where" id="dlgWhere"></span>
+      <button class="btn" id="dlgClose" type="button">Close</button>
+    </div>
+    <div class="dlg-body" id="dlgBody" tabindex="-1"></div>
+    <div class="dlg-nav">
+      <button class="btn" id="dlgPrev" type="button">← Back</button>
+      <span class="soft" id="dlgCount"></span>
+      <button class="btn go" id="dlgNext" type="button">Next →</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  var DATA={"nodes": {"lowe-1": {"shape": "lowe", "src": "Lisa Lowe, Chapter 1", "t": "Liberal universalism", "kw": [["liberal universalism", "liberalism’s claim that freedom, reason, and rights belong to everyone (Lowe 2–3)."], ["condition of possibility", "what must already be in place for something to exist; for Lowe, deciding who is not human is what makes liberal freedom possible (3)."]], "rel": ["wynter-1", "crc-1"]}, "lowe-2": {"shape": "lowe", "src": "Lisa Lowe, Chapter 1", "t": "Colonial divisions of humanity", "kw": [["colonial divisions of humanity", "the ranking of peoples at different distances from “European man”: “Indian,” “Black,” “Negro,” “Chinese,” “coolie” (6–8)."], ["race as remainder", "race as “an enduring remainder” of that ranking, a leftover mark that keeps returning (7)."]], "rel": ["wynter-2", "crc-2"]}, "lowe-3": {"shape": "lowe", "src": "Lisa Lowe, Chapters 1 and 3", "t": "Colonial division of intimacy", "kw": [["intimacy", "Lowe’s tool for reading both private, domestic closeness and the older sense of “close connexion” among peoples across continents (18–19)."], ["possessive individual", "C. B. Macpherson’s term, used by Lowe, for the liberal person defined by owning himself and his property (18)."]], "rel": ["wynter-3", "crc-3", "ex-1"]}, "lowe-4": {"shape": "lowe", "src": "Lisa Lowe, Chapters 1, 3, and 5", "t": "Affirmation and forgetting", "kw": [["economy of affirmation and forgetting", "the trade-off by which liberal histories celebrate Europe’s freedom and forget colonial labor (3)."], ["archive", "the colonial records, filed in separate departments, that make these connections hard to see (4–5)."], ["past conditional temporality", "reading the past for “what could have been” (175)."]], "rel": ["wynter-4", "crc-4", "ex-1"]}, "wynter-1": {"shape": "wynter", "src": "Sylvia Wynter, pp. 260–62", "t": "The overrepresentation of Man", "kw": [["overrepresentation", "one version of the human presenting itself “as if it were the human itself” (260)."], ["ethnoclass", "Wynter’s word for “Western bourgeois”: a group defined by both ethnicity and class (260)."], ["descriptive statement", "a culture’s working answer to who and what we are (262)."]], "rel": ["lowe-1", "crc-1"]}, "wynter-2": {"shape": "wynter", "src": "Sylvia Wynter, pp. 263–66", "t": "Man1 and the Human Other", "kw": [["Man1", "Man “as political subject” of the state, from the Renaissance to the eighteenth century (263–64, 318)."], ["matrix slot of Otherness", "the position of the Other, held first by heretics and infidels, then by “Indians” and “Negroes” (266)."], ["Human Other", "the “irrational/subrational” figure against which Man defines itself (266)."]], "rel": ["lowe-2", "crc-2"]}, "wynter-3": {"shape": "wynter", "src": "Sylvia Wynter, pp. 318–21", "t": "Man2, the economic human", "kw": [["Man2", "Man “as a bio-economic subject,” from the end of the eighteenth century on (318)."], ["Natural Scarcity", "the economic “ill” that replaces Original Sin, so that salvation becomes material (320)."], ["Breadwinner and Investor", "the minimum and the ideal of being fully human under Man2 (321)."]], "rel": ["lowe-3", "crc-3"]}, "wynter-4": {"shape": "wynter", "src": "Sylvia Wynter, pp. 321–25", "t": "The archipelago of Human Otherness", "kw": [["archipelago of Human Otherness", "scattered groups (the jobless, the homeless, the Poor, the criminalized) that together form one system (321)."], ["dysselected", "those cast as least evolved: the “mode of non-being” everyone must prove they are not (325)."]], "rel": ["lowe-4", "crc-4", "ex-2", "ex-3"]}, "crc-1": {"shape": "crc", "src": "Koshy et al., Introduction", "t": "Racial capitalism", "kw": [["racial capitalism", "Cedric Robinson’s argument, central to the book, that capitalism works through racial differences rather than erasing them (1–2)."], ["differentiation", "exaggerating “regional, subcultural, and dialectical differences into ‘racial’ ones” (Robinson, qtd. in 2)."]], "rel": ["lowe-1", "wynter-1"]}, "crc-2": {"shape": "crc", "src": "Introduction and Goldstein, Chapter 2", "t": "Recursive dispossession", "kw": [["recursive dispossession", "Rob Nichols’s term: land is turned into property in order to be taken (5)."], ["filius nullius / terra nullius", "“nobody’s child” and “nobody’s land,” legal ideas used to remove Native children and Native land (16)."], ["social reproduction", "Goldstein’s focus: how family, property, and inheritance remake racial and colonial order over time (61, 76–77)."]], "rel": ["lowe-2", "wynter-2"]}, "crc-3": {"shape": "crc", "src": "Cheryl I. Harris, Chapter 3", "t": "The racial alchemy of debt", "kw": [["racial alchemy", "debt’s power to hide racial burdens behind race-neutral rules (95)."], ["predatory inclusion", "inclusion in credit markets, offered as the cure for Black subordination, on extractive terms (96)."]], "rel": ["lowe-3", "wynter-3", "ex-2"]}, "crc-4": {"shape": "crc", "src": "Iyko Day, Chapter 8", "t": "Colonial unknowing", "kw": [["colonial unknowing", "the active not-knowing of colonial violence, a term Day takes from Vimalassery, Pegues, and Goldstein (258)."], ["antipolitics", "framing imperial power as neutral technology, so it looks like no one’s decision (258)."], ["nonsite", "Indigenous and colonized lands treated as outside nuclear modernity and open to “wastelanding” (259)."]], "rel": ["lowe-4", "wynter-4", "ex-3"]}, "ex-1": {"shape": "ex", "src": "Example 1 · Lisa Lowe, Chapter 3", "t": "Silk stands for opium", "kw": [["colonial commodity", "goods like tea, chintz, and silk that “evoked yet obscured their conditions of production” (99)."], ["metaphor", "a “carrying-over” from one thing to another that equates and hides at once (96–97)."]], "rel": ["lowe-3", "lowe-4", "wynter-3"]}, "ex-2": {"shape": "ex", "src": "Example 2 · Harris, Chapter 3, with Wynter", "t": "Leveler Rings", "kw": [["afterlives of slavery", "forms through which slavery’s extraction continues, such as convict leasing, the chain gang, and prison labor (90)."], ["racelessness", "the false neutrality of an ordinary object, which Harris calls “illusory” (90)."]], "rel": ["crc-3", "wynter-4"]}, "ex-3": {"shape": "ex", "src": "Example 3 · Bong Joon Ho, Parasite (2019)", "t": "Parasite", "kw": [["the line", "Mr. Park’s boundary between employer and employee, read here as Wynter’s line between Man and its Other."], ["the smell", "class made into a bodily, “biological” trait, the kind of difference Robinson and the editors describe."], ["the flood", "one storm, two worlds: Wynter’s Natural Scarcity falls along class lines."]], "rel": ["wynter-1", "lowe-3", "wynter-4", "crc-1", "crc-3", "crc-4"]}, "after-1": {"shape": "pill", "src": "Conclusion · Lowe, Wynter, and Day", "t": "Toward the human, after Man", "kw": [["other humanities", "Lowe’s plural humanities, imagined and mourned against the received idea of “the human” (175)."], ["the Human, after Man", "Wynter’s horizon: a species no longer defined by one ethnoclass."], ["queer art of failure", "Day’s phrase, after Jack Halberstam, for objects whose uselessness resists the commodity’s abstract time (277–78)."]], "rel": ["lowe-4", "wynter-1", "crc-4"]}}, "qs": {"q1": {"n": "Question 1", "t": "Who gets to define “the human”?", "sum": "All three authors argue that the “universal” human is really one particular group.", "nodes": ["lowe-1", "wynter-1", "crc-1"]}, "q2": {"n": "Question 2", "t": "Who is pushed outside of it?", "sum": "That group defines itself by casting other peoples as less than human.", "nodes": ["lowe-2", "wynter-2", "crc-2"]}, "q3": {"n": "Question 3", "t": "What does being “fully human” require?", "sum": "Being fully human gets tied to owning a home, property, and money.", "nodes": ["lowe-3", "wynter-3", "crc-3"]}, "q4": {"n": "Question 4", "t": "What gets hidden?", "sum": "The people pushed out, and the labor they do, are kept out of sight.", "nodes": ["lowe-4", "wynter-4", "crc-4"]}, "q5": {"n": "Question 5", "t": "Where does this show up in the world?", "sum": "Two examples come from the readings. The third, <i>Parasite</i>, shows the same idea today.", "nodes": ["ex-1", "ex-2", "ex-3"]}}};
+  var root=document.documentElement;
+
+  /* text size */
+  var scale=1;
+  var sizeVal=document.getElementById('sizeVal');
+  function applyScale(){root.style.setProperty('--scale',scale);if(sizeVal)sizeVal.textContent=Math.round(scale*100)+'%';requestAnimationFrame(draw);}
+
+  /* connectors */
+  var chart=document.getElementById('chart'),svg=document.getElementById('wires');
+  var edges=[['start','q1','flow','']];
+  [1,2,3,4].forEach(function(r){
+    ['lowe','wynter','crc'].forEach(function(t,i){
+      if(r===1){edges.push(['q1','h-'+t,'flow','']);edges.push(['h-'+t,t+'-1','join',''],);}
+      else edges.push(['q'+r,t+'-'+r,'flow',['Lowe','Wynter','Koshy et al.'][i]]);
+      edges.push([t+'-'+r,'q'+(r+1),'join','']);
+    });
+  });
+  ['ex-1','ex-2','ex-3'].forEach(function(x,i){edges.push(['q5',x,'flow',['Reading','Reading','Today'][i]]);edges.push([x,'end','join','']);});
+  function el(k){return chart.querySelector('[data-k="'+k+'"]');}
+  function draw(){
+    var c=chart.getBoundingClientRect(),out='';
+    out+='<defs><marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--go)"/></marker>'+
+         '<marker id="ahj" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--line)"/></marker>'+
+         ['lowe','wynter','crc'].map(function(c){return '<marker id="ah-'+c+'" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--'+c+')"/></marker>';}).join('')+'</defs>';
+    edges.forEach(function(e){
+      var a=el(e[0]),b=el(e[1]);if(!a||!b)return;
+      var ra=a.getBoundingClientRect(),rb=b.getBoundingClientRect();
+      var x1=ra.left+ra.width/2-c.left,y1=ra.bottom-c.top,x2=rb.left+rb.width/2-c.left,y2=rb.top-c.top;
+      var ym=e[2]==='flow'?y1+(y2-y1)*0.42:y2-Math.min(22,(y2-y1)/2); /* joins share one bus just above the next shape */
+      var d=Math.abs(x1-x2)<1?'M'+x1+' '+y1+' V'+(y2-1):'M'+x1+' '+y1+' V'+ym+' H'+x2+' V'+(y2-1);
+      var m=/^(?:h-)?(lowe|wynter|crc)(?:-|$)/.exec(e[1]),tc=(m&&(e[2]==='flow'||e[0].indexOf('h-')===0))?m[1]:null; /* branch arrows take the color of the text they lead to */
+      out+='<path class="'+e[2]+'" d="'+d+'"'+(tc?' style="stroke:var(--'+tc+')"':'')+' marker-end="url(#'+(tc?'ah-'+tc:(e[2]==='flow'?'ahg':'ahj'))+')"/>';
+      if(e[3])out+='<text x="'+(x2+7)+'" y="'+(ym+(y2-ym)/2+5)+'"'+(tc?' style="fill:var(--'+tc+')"':'')+'>'+e[3]+'</text>';
+    });
+    svg.innerHTML=out;
+  }
+  if(window.ResizeObserver){new ResizeObserver(function(){requestAnimationFrame(draw);}).observe(chart);}
+  window.addEventListener('resize',function(){requestAnimationFrame(draw);});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw);
+  applyScale();draw();
+
+  /* reader */
+  var steps=Array.prototype.map.call(document.querySelectorAll('article.entry[id]'),function(a){return a.id;});
+  var dlg=document.getElementById('reader'),body=document.getElementById('dlgBody'),where=document.getElementById('dlgWhere'),
+      count=document.getElementById('dlgCount'),prev=document.getElementById('dlgPrev'),next=document.getElementById('dlgNext');
+  var cur=0,mode='step',opener=null;
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+  function titleOf(id){var a=document.getElementById(id);return a?a.getAttribute('data-title'):id;}
+  function icoFor(id){var n=DATA.nodes[id];return '<i class="ico '+(n?n.shape:'pill')+'"></i>';}
+  function renderNode(i){
+    mode='step';cur=i;var id=steps[i],src=document.getElementById(id),n=DATA.nodes[id];
+    body.innerHTML='';
+    var c=src.cloneNode(true);c.removeAttribute('id');
+    var lbl=c.querySelector('.lbl');if(lbl)lbl.remove();
+    Array.prototype.forEach.call(c.querySelectorAll('.back'),function(x){x.remove();});
+    if(n&&n.kw){
+      var box=document.createElement('div');box.className='terms';
+      box.innerHTML='<p class="soft">Key terms</p><dl>'+n.kw.map(function(k){return '<div><dt>'+k[0]+':</dt> <dd>'+k[1]+'</dd></div>';}).join('')+'</dl>';
+      var sh=c.querySelector('.short');
+      if(sh)sh.insertAdjacentElement('afterend',box);else c.insertBefore(box,c.children[1]||null);
+    }
+    body.appendChild(c);
+    if(n&&n.rel&&n.rel.length){
+      var r=document.createElement('div');r.className='rel';
+      r.innerHTML='<p class="soft">Related ideas</p>';
+      var ch=document.createElement('div');ch.className='chips';
+      n.rel.forEach(function(x){var b=document.createElement('button');b.type='button';b.textContent=titleOf(x);b.onclick=function(){renderNode(steps.indexOf(x));};ch.appendChild(b);});
+      r.appendChild(ch);body.appendChild(r);
+    }
+    where.innerHTML=icoFor(id)+'<span>'+esc(n?n.src:'')+'</span>';
+    count.textContent=(i+1)+' of '+steps.length;
+    prev.style.visibility=i===0?'hidden':'visible';
+    next.textContent=i===steps.length-1?'Finish':'Next →';
+    body.scrollTop=0;body.focus({preventScroll:true});
+  }
+  function renderQ(qid){
+    mode='q';var q=DATA.qs[qid];
+    body.innerHTML='<h3>'+q.t+'</h3><p>'+q.sum+'</p><div class="answers"></div>';
+    var box=body.querySelector('.answers');
+    q.nodes.forEach(function(id){
+      var n=DATA.nodes[id];
+      var b=document.createElement('button');b.type='button';b.className='answer';
+      b.innerHTML='<span class="src">'+icoFor(id)+esc(n.src)+'</span><b>'+esc(titleOf(id))+'</b><span class="chips">'+n.kw.map(function(k){return '<span>'+k[0]+'</span>';}).join('')+'</span><span class="soft">Open this idea →</span>';
+      b.onclick=function(){renderNode(steps.indexOf(id));};
+      box.appendChild(b);
+    });
+    where.innerHTML='<i class="ico q"></i><span>'+esc(q.n)+'</span>';
+    count.textContent='';
+    prev.style.visibility='hidden';
+    next.textContent='Read the first answer →';
+    next.onclickTarget=q.nodes[0];
+    body.scrollTop=0;body.focus({preventScroll:true});
+  }
+  function show(){if(!dlg.open){if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','');}}
+  function close(){if(dlg.close)dlg.close();else dlg.removeAttribute('open');}
+  dlg.addEventListener('close',function(){if(opener)opener.focus();});
+  prev.onclick=function(){if(mode==='step'&&cur>0)renderNode(cur-1);};
+  next.onclick=function(){
+    if(mode==='q'){renderNode(steps.indexOf(next.onclickTarget));return;}
+    if(cur<steps.length-1)renderNode(cur+1);else close();
+  };
+  document.getElementById('dlgClose').onclick=close;
+  dlg.addEventListener('click',function(e){if(e.target===dlg)close();});
+  dlg.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'){e.preventDefault();next.click();}
+    else if(e.key==='ArrowLeft'){e.preventDefault();prev.click();}
+  });
+  function startTour(e){opener=e.currentTarget;renderNode(0);show();}
+  Array.prototype.forEach.call(document.querySelectorAll('[data-tour]'),function(b){b.onclick=startTour;});
+  Array.prototype.forEach.call(document.querySelectorAll('[data-open]'),function(b){
+    b.addEventListener('click',function(){opener=b;renderNode(steps.indexOf(b.getAttribute('data-open')));show();});
+  });
+  /* contents: menu on small screens, highlight while scrolling */
+  var tocDlg=document.getElementById('tocDlg');
+  document.getElementById('tocBtn').onclick=function(){if(tocDlg.showModal)tocDlg.showModal();else tocDlg.setAttribute('open','');};
+  function closeToc(){if(tocDlg.close)tocDlg.close();else tocDlg.removeAttribute('open');}
+  document.getElementById('tocClose').onclick=closeToc;
+  tocDlg.addEventListener('click',function(e){if(e.target===tocDlg||e.target.closest('a'))closeToc();});
+  var links=document.querySelectorAll('.toc a');
+  var targets=[];Array.prototype.forEach.call(links,function(l){var t=document.getElementById(l.getAttribute('href').slice(1));if(t&&targets.indexOf(t)<0)targets.push(t);});
+  function spy(){
+    var y=110,cur=null;
+    targets.forEach(function(t){if(t.getBoundingClientRect().top<=y)cur=t.id;});
+    if(!cur&&targets[0])cur=targets[0].id;
+    Array.prototype.forEach.call(links,function(l){l.classList.toggle('on',l.getAttribute('href')==='#'+cur);});
+  }
+  var ticking=false;window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(function(){spy();ticking=false;});}},{passive:true});
+  spy();
+
+  /* bar title appears after the page title scrolls out of view */
+  var h1=document.querySelector('h1'),bar=document.querySelector('.bar');
+  if(h1&&bar&&window.IntersectionObserver){new IntersectionObserver(function(es){bar.classList.toggle('scrolled',!es[0].isIntersecting);},{rootMargin:'-60px 0px 0px 0px'}).observe(h1);}
+
+  /* no dragging or selecting text anywhere */
+  document.addEventListener('dragstart',function(e){e.preventDefault();});
+  document.addEventListener('selectstart',function(e){e.preventDefault();});
+
+  /* custom cursor: lives in whichever layer is on top (page or open panel), so it never hides behind or vanishes with a panel */
+  if(window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches){
+    root.classList.add('cc');
+    var dot=document.createElement('div');dot.className='cur off';dot.setAttribute('aria-hidden','true');document.body.appendChild(dot);
+    var HOT='a,button,summary,select,label,[role="button"]',cx=-100,cy=-100,seen=false;
+    function host(){var open=document.querySelectorAll('dialog[open]');return open.length?open[open.length-1]:document.body;}
+    function place(){var h=host();if(dot.parentNode!==h)h.appendChild(dot);}
+    function update(target){
+      place();
+      dot.style.transform='translate('+cx+'px,'+cy+'px)';
+      var t=target||document.elementFromPoint(cx,cy);
+      dot.classList.toggle('hot',!!(t&&t.closest&&t.closest(HOT)));
+      if(seen)dot.classList.remove('off');
+    }
+    document.addEventListener('pointermove',function(e){if(e.pointerType&&e.pointerType!=='mouse')return;cx=e.clientX;cy=e.clientY;seen=true;update(e.target);},{passive:true});
+    document.addEventListener('pointerdown',function(e){if(e.pointerType&&e.pointerType!=='mouse')return;cx=e.clientX;cy=e.clientY;seen=true;update(e.target);},{passive:true});
+    /* panels opening or closing: move the cursor into the new top layer right away */
+    var mo=new MutationObserver(function(){requestAnimationFrame(function(){update();});});
+    Array.prototype.forEach.call(document.querySelectorAll('dialog'),function(d){mo.observe(d,{attributes:true,attributeFilter:['open']});d.addEventListener('close',function(){requestAnimationFrame(function(){update();});});});
+    /* scrolling without moving the mouse: refresh the hover color */
+    window.addEventListener('scroll',function(){if(seen)requestAnimationFrame(function(){update();});},{passive:true,capture:true});
+    /* hide only when the mouse truly leaves the page */
+    document.addEventListener('mouseout',function(e){if(!e.relatedTarget)dot.classList.add('off');});
+    window.addEventListener('blur',function(){dot.classList.add('off');});
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-q]'),function(b){
+    b.addEventListener('click',function(){opener=b;renderQ(b.getAttribute('data-q'));show();});
+  });
+})();
+</script>
+
+</body>
+</html>

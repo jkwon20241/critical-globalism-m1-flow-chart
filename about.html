@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>About This Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap">
+<style>
+@font-face{font-family:"Repro";src:local("ABC Repro Trial"),local("ABCReproTrial-Regular"),local("ABC Repro"),local("ABCRepro-Regular");font-weight:400;font-style:normal}
+@font-face{font-family:"Repro";src:local("ABC Repro Trial Italic"),local("ABCReproTrial-RegularItalic"),local("ABC Repro Italic"),local("ABCRepro-RegularItalic");font-weight:400;font-style:italic}
+@font-face{font-family:"Repro";src:local("ABC Repro Trial Bold"),local("ABCReproTrial-Bold"),local("ABC Repro Bold"),local("ABCRepro-Bold");font-weight:700;font-style:normal}
+@font-face{font-family:"Repro";src:local("ABC Repro Trial Black"),local("ABCReproTrial-Black"),local("ABC Repro Black"),local("ABCRepro-Black");font-weight:900;font-style:normal}
+@font-face{font-family:"Repro";src:local("ABC Repro Trial Bold Italic"),local("ABCReproTrial-BoldItalic"),local("ABC Repro Bold Italic"),local("ABCRepro-BoldItalic");font-weight:700;font-style:italic}
+/* Same charcoal system as the flowchart page: heading 14pt, subheading 13pt, body 12pt. */
+:root{
+  --bg:#2B2B2D; --paper:#333336; --ink:#F2F1EC; --muted:#B9B8B2; --line:#7B7B7F; --fill:#3E3E42;
+  --lowe:#8FAEF2; --wynter:#EE8DB2; --crc:#E39E62;
+  --cursor:#F5F4EF; --cursor-hot:#FFD400; --go:#82C972; --go-fill:#2F4729; --focus:#8AB4F8;
+  --font:"Repro","ABC Repro Trial","ABC Repro","Archivo",system-ui,sans-serif;
+  --body:12pt; --sub:13pt; --head:14pt;
+  color-scheme:dark;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html,body,*{-webkit-user-select:none;user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none}
+html{font-size:var(--body)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:var(--body);line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 72px}
+h1,h2{margin:0;font-size:var(--head);font-weight:700;line-height:1.3;text-wrap:balance}
+h3{margin:0;font-size:var(--sub);font-weight:700}
+p{margin:0}
+p,li,blockquote{text-wrap:pretty;hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:7 3 3;hanging-punctuation:first}
+h1,h2,h3,.btn,.key span{hyphens:manual}
+a{color:var(--ink)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+.soft{font-style:italic;color:var(--muted)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));padding-block:10px}
+.bar-in{max-width:64ch;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.btn{border:1.5px solid var(--ink);background:var(--bg);padding:5px 14px;line-height:1.3;color:var(--ink);text-decoration:none;white-space:nowrap}
+.btn:hover{background:var(--fill)}
+.bar-title{font-weight:700;margin-left:auto}
+main{max-width:64ch;margin:0 auto;display:grid;gap:36px;padding-top:36px}
+header{display:grid;gap:10px;border-bottom:1.5px solid var(--ink);padding-bottom:22px}
+section{display:grid;gap:10px}
+section h2{display:flex;align-items:center;gap:10px}
+.ico{display:inline-block;width:14px;height:14px;flex:none;background:var(--ink)}
+.ico.lowe{background:var(--lowe)} .ico.wynter{background:var(--wynter);clip-path:polygon(50% 0,100% 100%,0 100%)} .ico.crc{background:var(--crc);border-radius:50%}
+.ico.q{background:none;border:1.5px solid var(--ink);transform:rotate(45deg) scale(.82)}
+.ico.ex{background:var(--go);clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)}
+.ico.pill{display:none}
+.key{display:flex;flex-wrap:wrap;gap:10px 28px;border:1px dashed var(--line);padding:14px 18px}
+.key span{display:flex;align-items:center;gap:10px}
+blockquote{margin:0;padding:12px 18px;background:var(--fill)}
+@media (hover:hover) and (pointer:fine){html.cc,html.cc *{cursor:none !important}}
+.cur{position:fixed;left:0;top:0;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:50%;background:var(--cursor);pointer-events:none;z-index:2147483647;transform:translate(-100px,-100px);transition:background-color .12s ease}
+.cur.hot{background:var(--cursor-hot);box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+.cur.off{opacity:0}
+</style>
+</head>
+<body>
+<div class="bar">
+  <div class="bar-in">
+    <a class="btn" href="index.html">← Back to the flowchart</a>
+    <span class="bar-title">About this project</span>
+  </div>
+</div>
+
+<main>
+  <header>
+    <p class="soft">Who Counts as Human? · Critical Globalisms · Fall 2026</p>
+    <h1>About this project</h1>
+    <p class="soft">Jennie Kwon</p>
+  </header>
+
+  <section>
+    <h2><i class="ico pill"></i>Why a website</h2>
+    <p>The assignment asks for a map that is “easily accessible” and that replaces written transitions with illustrations. As a graphic design student, I treated that as a design brief: a website opens anywhere, and it lets the reader follow one author down the page or compare all three texts side by side, which matches how the readings answer the same questions from different positions.</p>
+  </section>
+
+  <section>
+    <h2><i class="ico q"></i>The visual system</h2>
+    <p>I borrowed the conventions of the flow chart and gave each text one simple shape and one color, so the system can be read by shape alone. A narrow type hierarchy, click-to-open shapes, and a contents sidebar keep the first view calm for a reader outside of design, while the full argument stays one click away.</p>
+    <div class="key" aria-label="Shape key">
+      <span style="color:var(--lowe)"><i class="ico lowe"></i>Lowe</span>
+      <span style="color:var(--wynter)"><i class="ico wynter"></i>Wynter</span>
+      <span style="color:var(--crc)"><i class="ico crc"></i>Koshy et al.</span>
+      <span><i class="ico q"></i>Question</span>
+      <span style="color:var(--go)"><i class="ico ex"></i>Example</span>
+    </div>
+  </section>
+
+  <section>
+    <h2><i class="ico ex"></i>Design and the course</h2>
+    <p>Flow-chart symbols are an international standard (ISO 5807) that presents itself as neutral and universal. Reading Wynter on the overrepresentation of Man, and Harris’s claim that “the racelessness of the object is illusory” (90), made me see that design conventions also decide whom they are built for. Thus, I used the flow chart knowingly: as a familiar structure that makes the readings accessible, and as a reminder that every visual system, like every definition of the human, includes some and leaves others out.</p>
+  </section>
+
+  <p><a class="btn" href="index.html">← Back to the flowchart</a></p>
+</main>
+
+<script>
+(function(){
+  document.addEventListener('dragstart',function(e){e.preventDefault();});
+  document.addEventListener('selectstart',function(e){e.preventDefault();});
+  if(!(window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches))return;
+  document.documentElement.classList.add('cc');
+  var cur=document.createElement('div');cur.className='cur off';cur.setAttribute('aria-hidden','true');document.body.appendChild(cur);
+  var cx=-100,cy=-100,seen=false;
+  function update(target){
+    cur.style.transform='translate('+cx+'px,'+cy+'px)';
+    var t=target||document.elementFromPoint(cx,cy);
+    cur.classList.toggle('hot',!!(t&&t.closest&&t.closest('a,button,summary')));
+    if(seen)cur.classList.remove('off');
+  }
+  document.addEventListener('pointermove',function(e){if(e.pointerType&&e.pointerType!=='mouse')return;cx=e.clientX;cy=e.clientY;seen=true;update(e.target);},{passive:true});
+  window.addEventListener('scroll',function(){if(seen)requestAnimationFrame(function(){update();});},{passive:true});
+  document.addEventListener('mouseout',function(e){if(!e.relatedTarget)cur.classList.add('off');});
+  window.addEventListener('blur',function(){cur.classList.add('off');});
+})();
+</script>
+</body>
+</html>
