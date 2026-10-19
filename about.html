@@ -58,9 +58,26 @@ blockquote{margin:0;padding:12px 18px;background:var(--fill)}
 .cur{position:fixed;left:0;top:0;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:50%;background:var(--cursor);pointer-events:none;z-index:2147483647;transform:translate(-100px,-100px);transition:background-color .12s ease}
 .cur.hot{background:var(--cursor-hot);box-shadow:0 0 0 1px rgba(0,0,0,.35)}
 .cur.off{opacity:0}
+
+/* desktop only: below 1024px (phones, tablets in portrait) show a notice instead of the site */
+.desktop-only-note{display:none}
+@media (max-width:1023.98px){
+  html,body{height:100%}
+  body>*:not(.desktop-only-note){display:none !important}
+  .desktop-only-note{display:grid;min-height:100%;place-items:center;text-align:center;padding:32px max(24px,env(safe-area-inset-right,0px)) 32px max(24px,env(safe-area-inset-left,0px))}
+  .desktop-only-note div{display:grid;gap:14px;max-width:26em}
+  .desktop-only-note .dn-title{font-size:22pt;font-weight:900;line-height:1.1}
+  .desktop-only-note .dn-msg{font-size:14pt;font-weight:700;line-height:1.35}
+  .desktop-only-note .ico-row{display:flex;justify-content:center;gap:10px}
+}
 </style>
 </head>
 <body>
+<div class="desktop-only-note" role="alert"><div>
+  <p class="ico-row" aria-hidden="true"><i class="ico lowe"></i><i class="ico wynter"></i><i class="ico crc"></i></p>
+  <p class="dn-title">Who Counts as Human?</p>
+  <p class="dn-msg">Please view on desktop mode or on a laptop</p>
+</div></div>
 <div class="bar">
   <div class="bar-in">
     <a class="btn" href="index.html">← Back to the flowchart</a>

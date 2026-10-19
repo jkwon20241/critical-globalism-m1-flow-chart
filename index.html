@@ -243,9 +243,26 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 </style>
 <style>/* page reset (the claude.ai host adds this itself) */
 body{margin:0}img{max-width:100%}[hidden]{display:none!important}
-:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+/* desktop only: below 1024px (phones, tablets in portrait) show a notice instead of the site */
+.desktop-only-note{display:none}
+@media (max-width:1023.98px){
+  html,body{height:100%}
+  body>*:not(.desktop-only-note){display:none !important}
+  .desktop-only-note{display:grid;min-height:100%;place-items:center;text-align:center;padding:32px max(24px,env(safe-area-inset-right,0px)) 32px max(24px,env(safe-area-inset-left,0px))}
+  .desktop-only-note div{display:grid;gap:14px;max-width:26em}
+  .desktop-only-note .dn-title{font-size:22pt;font-weight:900;line-height:1.1}
+  .desktop-only-note .dn-msg{font-size:14pt;font-weight:700;line-height:1.35}
+  .desktop-only-note .ico-row{display:flex;justify-content:center;gap:10px}
+}
+</style>
 </head>
 <body>
+<div class="desktop-only-note" role="alert"><div>
+  <p class="ico-row" aria-hidden="true"><i class="ico lowe"></i><i class="ico wynter"></i><i class="ico crc"></i></p>
+  <p class="dn-title">Who Counts as Human?</p>
+  <p class="dn-msg">Please view on desktop mode or on a laptop</p>
+</div></div>
 
 
 <div class="bar" role="region" aria-label="Reading tools">
