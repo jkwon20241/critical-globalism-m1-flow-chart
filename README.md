@@ -4,6 +4,6 @@ A flowchart concept map of **Man / the Human** across Lisa Lowe, *The Intimacies
 
 Alternative Mid-Term for Critical Globalisms (Prof. Sunhay You), Fall 2026, by Jennie Kwon.
 
-Live site: https://jkwon20241.github.io/criticalglobalismmidterm1flowchart/
+Live site: https://jkwon20241.github.io/critical-globalism-m1-flow-chart/
 
 Images: figures reproduced from the course readings with their original credits (Victoria and Albert Museum; Cameron Rowland, courtesy of the artist and Maxwell Graham/Essex Street) and film stills © 2019 CJ ENM Corporation, Barunson E&A, via Festival de Cannes, used for educational commentary.
