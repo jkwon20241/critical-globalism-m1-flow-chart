@@ -244,9 +244,9 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 <style>/* page reset (the claude.ai host adds this itself) */
 body{margin:0}img{max-width:100%}[hidden]{display:none!important}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-/* desktop only: below 1024px (phones, tablets in portrait) show a notice instead of the site */
+/* desktop only: on phones and tablets (touch screen, no mouse or trackpad) show a notice instead of the site, at any width; a narrow desktop window still gets the site */
 .desktop-only-note{display:none}
-@media (max-width:1023.98px){
+@media (hover:none) and (pointer:coarse){
   html,body{height:100%}
   body>*:not(.desktop-only-note){display:none !important}
   .desktop-only-note{display:grid;min-height:100%;place-items:center;text-align:center;padding:32px max(24px,env(safe-area-inset-right,0px)) 32px max(24px,env(safe-area-inset-left,0px))}

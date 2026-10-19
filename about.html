@@ -59,9 +59,9 @@ blockquote{margin:0;padding:12px 18px;background:var(--fill)}
 .cur.hot{background:var(--cursor-hot);box-shadow:0 0 0 1px rgba(0,0,0,.35)}
 .cur.off{opacity:0}
 
-/* desktop only: below 1024px (phones, tablets in portrait) show a notice instead of the site */
+/* desktop only: on phones and tablets (touch screen, no mouse or trackpad) show a notice instead of the site, at any width; a narrow desktop window still gets the site */
 .desktop-only-note{display:none}
-@media (max-width:1023.98px){
+@media (hover:none) and (pointer:coarse){
   html,body{height:100%}
   body>*:not(.desktop-only-note){display:none !important}
   .desktop-only-note{display:grid;min-height:100%;place-items:center;text-align:center;padding:32px max(24px,env(safe-area-inset-right,0px)) 32px max(24px,env(safe-area-inset-left,0px))}
